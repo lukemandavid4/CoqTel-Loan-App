@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { Tabs } from "expo-router";
 import { icons } from "../../constants";
 
@@ -22,13 +22,64 @@ const TabIcon = ({ icon, color, name, focused }) => {
 };
 const TabLayout = () => {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: "#FFA001",
+        tabBarInactiveTintColor: "#CDCDE0",
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: "#161622",
+          borderTopWidth: 1,
+          borderTopColor: "#232533",
+          height: 65,
+        },
+      }}
+    >
       <Tabs.Screen
         name="home"
-        options={{ title: "Home", headerShown: false }}
+        options={{
+          title: "Home",
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.home}
+              name="Home"
+              color={color}
+              focused={focused}
+            />
+          ),
+        }}
       />
-      <Tabs.Screen />
-      <Tabs.Screen />
+      <Tabs.Screen
+        name="loan"
+        options={{
+          title: "Loans",
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.home}
+              name="Loans"
+              color={color}
+              focused={focused}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          headerShown: false,
+          tabBarIcon: ({ color, focused }) => (
+            <TabIcon
+              icon={icons.profile}
+              name="Profile"
+              color={color}
+              focused={focused}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 };
