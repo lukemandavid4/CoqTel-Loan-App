@@ -1,15 +1,28 @@
-import { View, Text } from "react-native";
-import { Link } from "expo-router";
+import { View, Text, ScrollView } from "react-native";
+import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CustomButton from "../components/CustomButton";
+import { StatusBar } from "expo-status-bar";
 
 const Welcome = () => {
   return (
-    <SafeAreaView className="flex-1 items-center justify-center bg-primary">
-      <Text className="text-lg font-extrabold">
-        WELCOME TO COQTEL MOBILE LOANS
-      </Text>
-      <Text className="italic">Your Trusted and Reliable Loan Partner</Text>
-      <Link href="home">Home</Link>
+    <SafeAreaView className="bg-primary h-full">
+      <ScrollView contentContainerStyle={{ height: "100%" }}>
+        <View className="justify-center items-center h-full px-8 gap-4">
+          <Text className="text-2xl font-pextrabold text-white text-center">
+            WELCOME TO COQTEL MOBILE LOANS
+          </Text>
+          <Text className="italic text-secondary font-pbold text-base">
+            Your Trusted and Reliable Loan Partner
+          </Text>
+          <CustomButton
+            title="Get Started"
+            containerStyles="w-full absolute bottom-[20px]"
+            handlePress={() => router.push("/signIn")}
+          />
+        </View>
+      </ScrollView>
+      <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
   );
 };
