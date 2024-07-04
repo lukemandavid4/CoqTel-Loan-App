@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomButton from "../../components/CustomButton";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 const Home = () => {
   const [time, setTime] = useState("");
@@ -29,7 +29,11 @@ const Home = () => {
           <Text className="font-pmedium">
             Apply one and get access to cash every time you need it.
           </Text>
-          <CustomButton title="Apply now" containerStyles="self-start px-6" />
+          <CustomButton
+            title="Apply now"
+            containerStyles="self-start px-6"
+            handlePress={() => router.push("/loan")}
+          />
         </View>
         <View className="m-2 py-4">
           <Text className="font-psemibold text-lg">Earn Ksh 500</Text>
