@@ -15,14 +15,14 @@ const Welcome = () => {
           <Text className="italic text-secondary font-pbold text-base">
             Your Trusted and Reliable Loan Partner
           </Text>
-          <CustomButton
-            title="Get Started"
-            containerStyles="w-full absolute bottom-[20px]"
-            handlePress={() => router.push("/signIn")}
-          />
         </View>
+        <CustomButton
+          title="Get Started"
+          containerStyles="w-full absolute bottom-[20px]"
+          handlePress={() => router.push("/signIn")}
+        />
       </ScrollView>
-      <StatusBar backgroundColor="#16162" style="light" />
+      <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
   );
 };
