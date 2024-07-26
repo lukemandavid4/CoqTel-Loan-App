@@ -31,12 +31,6 @@ const SignIn = () => {
             >
               Sign Up
             </Link>
-            <Link
-              href="/home"
-              className="text-lg font-psemibold text-secondary"
-            >
-              Home
-            </Link>
           </View>
         </View>
       </ScrollView>
