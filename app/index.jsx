@@ -21,9 +21,7 @@ const Welcome = () => {
           containerStyles="w-full absolute bottom-[20px]"
           handlePress={() => router.push("/signIn")}
         />
-        <Text>
-          Already have an account? <Link>Sign In</Link>
-        </Text>
+        <Text className="text-white">Already have an account? Sign In</Text>
       </ScrollView>
       <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
