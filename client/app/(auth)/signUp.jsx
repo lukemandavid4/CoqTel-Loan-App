@@ -14,7 +14,17 @@ const SignUp = () => {
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [numberError, setNumberError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [generalError, setGeneralError] = useState("");
   const handleSignUp = async () => {
+    setNameError("");
+    setNumberError("");
+    setEmailError("");
+    setPasswordError("");
+    setGeneralError("");
     try {
       const response = await axios.post(
         "http://192.168.100.116:3000/api/user/register",
@@ -33,10 +43,24 @@ const SignUp = () => {
         Alert.alert("Error", "Something went wrong. Please try again.");
       }
     } catch (error) {
-      Alert.alert(
-        "Error",
-        error.response?.data?.message || "An error occurred. Please try again."
-      );
+      {
+        if (error.response && error.response.data) {
+          const errorMessage = error.response.data.message;
+          if (errorMessage.includes("name")) {
+            setNameError(errorMessage);
+          } else if (errorMessage.includes("number")) {
+            setNumberError(errorMessage);
+          } else if (errorMessage.includes("email")) {
+            setEmailError(errorMessage);
+          } else if (errorMessage.includes("password")) {
+            setPasswordError(errorMessage);
+          } else {
+            setGeneralError(errorMessage);
+          }
+        } else {
+          setGeneralError("An error occurred. Please try again.");
+        }
+      }
     }
   };
   return (
@@ -69,6 +93,9 @@ const SignUp = () => {
             value={email}
             onChange={setEmail}
           />
+          {emailError ? (
+            <Text className="text-red-500 mt-1 font-pbold">{emailError}</Text>
+          ) : null}
           <FormField
             title="Password"
             placeholder="Password"
@@ -76,6 +103,16 @@ const SignUp = () => {
             value={password}
             onChange={setPassword}
           />
+          {passwordError ? (
+            <Text className="text-red-500 mt-1 font-pbold">
+              {passwordError}
+            </Text>
+          ) : null}
+          {generalError ? (
+            <Text className="text-red-500 mt-3 text-center font-pbold">
+              {generalError}
+            </Text>
+          ) : null}
           <CustomButton
             title="Sign Up"
             containerStyles="mt-7"

@@ -12,7 +12,11 @@ import axios from "axios";
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [generalError, setGeneralError] = useState("");
   const handleSignIn = async () => {
+    setPasswordError("");
+    setGeneralError("");
     try {
       const response = await axios.post(
         "http://192.168.100.116:3000/api/user/login",
@@ -29,10 +33,16 @@ const SignIn = () => {
         Alert.alert("Error", "Invalid credentials. Please try again.");
       }
     } catch (error) {
-      Alert.alert(
-        "Error",
-        error.response?.data?.message || "An error occurred. Please try again."
-      );
+      if (error.response && error.response.data) {
+        const errorMessage = error.response.data.message;
+        if (errorMessage.includes("password")) {
+          setPasswordError(errorMessage);
+        } else {
+          setGeneralError(errorMessage);
+        }
+      } else {
+        setGeneralError("An error occurred. Please try again.");
+      }
     }
   };
   return (
@@ -56,6 +66,16 @@ const SignIn = () => {
             value={password}
             onChange={setPassword}
           />
+          {passwordError ? (
+            <Text className="text-red-500 mt-1 font-pbold">
+              {passwordError}
+            </Text>
+          ) : null}
+          {generalError ? (
+            <Text className="text-red-500 mt-3 text-center font-pbold">
+              {generalError}
+            </Text>
+          ) : null}
           <CustomButton
             title="Sign In"
             containerStyles="mt-7"
