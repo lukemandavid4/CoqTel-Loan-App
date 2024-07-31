@@ -3,7 +3,7 @@ const userRoute = require("./routes/userRoute.js");
 const connectDB = require("./config/config");
 const app = express();
 
-app.use(express.json);
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(`/api/user`, userRoute);
 
