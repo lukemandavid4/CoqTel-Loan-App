@@ -1,34 +1,34 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link } from "expo-router";
+import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import axios from "axios";
 import { useState } from "react";
-const navigation = useNavigation();
 
 const SignUp = () => {
-  const [fullName, setFullName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSignUp = async () => {
     try {
       const response = await axios.post(
-        "http://192.168.100.116/api/users/register",
+        "http://192.168.100.116:3000/api/user/register",
         {
-          fullName,
-          phoneNumber,
+          name,
+          number,
           email,
           password,
         }
       );
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         Alert.alert("Success", "You have signed up successfully!");
-        navigation.navigate("home");
+        router.push("/home");
       } else {
         Alert.alert("Error", "Something went wrong. Please try again.");
       }
@@ -50,16 +50,17 @@ const SignUp = () => {
             title="Full Name"
             placeholder="Full Name"
             otherStyles="mt-7"
-            value={fullName}
-            onChange={setFullName}
+            value={name}
+            onChange={setName}
           />
           <FormField
             title="Phone Number"
             placeholder="Phone Number"
             otherStyles="mt-7"
             number="+254"
-            value={phoneNumber}
-            onChange={setPhoneNumber}
+            value={number}
+            onChange={setNumber}
+            length={9}
           />
           <FormField
             title="Email"
@@ -78,7 +79,7 @@ const SignUp = () => {
           <CustomButton
             title="Sign Up"
             containerStyles="mt-7"
-            onPress={handleSignUp}
+            handlePress={handleSignUp}
           />
           <View className="justify-center pt-5 flex-row gap-2">
             <Text className="text-lg text-gray-100 font-pregular">

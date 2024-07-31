@@ -9,6 +9,7 @@ const FormField = ({
   number,
   value,
   onChange,
+  length,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -22,7 +23,8 @@ const FormField = ({
           placeholderTextColor="#7b7b8b"
           secureTextEntry={title === "Password" && !showPassword}
           value={value}
-          onChange={onChange}
+          onChangeText={onChange}
+          maxLength={length}
         />
         {title === "Password" && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
