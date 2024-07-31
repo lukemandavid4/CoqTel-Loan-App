@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   number: {
-    type: String,
+    type: Number,
     required: true,
     unique: true,
   },
@@ -21,5 +21,5 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const userModel = mongoose.models.user || mongoose.model("user", userSchema);
+const userModel = mongoose.models.user || mongoose.model("User", userSchema);
 module.exports = userModel;
